@@ -5,17 +5,12 @@ import logo from "./logo_final.png";
 import Menu from "./Components/Menu/Menu";
 
 class App extends React.Component {
-  _isMounted = false;
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      data: null,
-      latitude: "",
-      longitude: "",
-      error: null
-    };
+  state = {
+    data: null,
+    latitude: "",
+    longitude: "",
+    error: null
   }
 
   async getJson = () => {
@@ -30,8 +25,8 @@ class App extends React.Component {
       this.setState({error: "geoLocation API not available - Bhavik sucks"});
       return;
     }
-    const linkJson = `https://whatsin.whiscode.dotnetcloud.co.uk/places/nearby?latitude=${latitude}&longitude=${longitude}`;
-    const dataJson = await fetch(linkJson, { cache: "no-cache" }).then(res => {
+    const fetchURL = `https://whatsin.whiscode.dotnetcloud.co.uk/places/nearby?latitude=${latitude}&longitude=${longitude}`;
+    const dataJson = await fetch(fetchURL, { cache: "no-cache" }).then(res => {
       if (!res.ok) {
         this.setState({error: "unable to fetch data - Bhavik still sucks"});
       }
